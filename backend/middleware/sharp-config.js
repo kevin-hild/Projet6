@@ -1,5 +1,6 @@
 const sharp = require("sharp");
 const path = require("path");
+const fs = require("fs"); // Importer le module fs pour gérer les fichiers
 
 const processImage = (req, res, next) => {
     if (req.file) {
@@ -33,6 +34,17 @@ const processImage = (req, res, next) => {
                 // Mise à jour de req.file pour refléter les nouvelles informations sur l'image
                 req.file.filename = webpFilename;
                 req.file.path = webpImagePath;
+
+                // Supprimer l'image originale si elle est stockée sur disque
+                if (req.file.path && !req.file.buffer) {
+                    fs.unlink(req.file.path, (err) => {
+                        if (err) {
+                            console.error("Error deleting original image:", err);
+                        } else {
+                            console.log("Original image deleted successfully.");
+                        }
+                    });
+                }
 
                 next(); // Passer au middleware suivant
             });

@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const booksRoutes = require('./routes/books');
 const userRoutes = require('./routes/user');
 const path = require('path');
-// const cors = require('cors');
 
 // Connexion à la base de données MongoDB hébergée via MongoDB Atlas
 mongoose.connect('mongodb+srv://dotadouze:t394QxMcrKcDeyII@cluster0.tyujc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
@@ -14,7 +13,7 @@ mongoose.connect('mongodb+srv://dotadouze:t394QxMcrKcDeyII@cluster0.tyujc.mongod
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
-// app.use(cors());
+
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

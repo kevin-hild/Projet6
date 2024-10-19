@@ -17,5 +17,5 @@ const bookSchema = mongoose.Schema({
   averageRating: { type: Number },
 });
 
-// reusable model export
+// Exportation de modèle réutilisable
 module.exports = mongoose.model('Book', bookSchema);

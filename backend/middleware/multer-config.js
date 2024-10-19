@@ -6,15 +6,18 @@ const MIME_TYPES = {
   'image/png': 'png'
 };
 
-// Use memory storage for multer
-const storage = multer.memoryStorage();
+// Configuration du stockage en mémoire pour multer
+const storage = multer.memoryStorage();  // Stocke les fichiers téléchargés en mémoire (RAM)
 
-const fileFilter = (req, file, callback) => {
-  if (MIME_TYPES[file.mimetype]) {
-    callback(null, true);
+// Fonction de filtrage des fichiers (fileFilter)
+const fileFilter = (req, file, callback) => {  
+  if (MIME_TYPES[file.mimetype]) {       // Vérifie si le type MIME du fichier est dans la liste des types acceptés
+    callback(null, true);                // Si le type MIME est accepté, accepte le fichier
   } else {
-    callback(new Error('Invalid file type.'));
+    callback(new Error('Invalid file type.'));  // Sinon, génère une erreur pour type de fichier invalide
   }
 };
 
-module.exports = multer({ storage: storage, fileFilter: fileFilter }).single('image');
+// Exportation de la configuration multer avec le stockage et le filtrage des fichiers
+module.exports = multer({ storage: storage, fileFilter: fileFilter }).single('image'); // Gère un seul fichier nommé 'image'
+
